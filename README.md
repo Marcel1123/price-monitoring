@@ -6,5 +6,5 @@
 * Cocei Tiberiu
 * Pirlog Marcel Ionut
 
-**Team coordonator**
+**Team coordinator**
 * Frasinaru Cristian
