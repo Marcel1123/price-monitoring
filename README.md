@@ -2,7 +2,9 @@
 
 **Team members**
 
-* Item 1
-* Item 2
-  * Item 2a
-  * Item 2b
+* Anichitoaie Beatrice-Roxana
+* Cocei Tiberiu
+* Pirlog Marcel Ionut
+
+** Team coordonator **
+* Frasinaru Cristian
