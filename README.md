@@ -8,3 +8,7 @@
 
 **Team coordinator**
 * Frasinaru Cristian
+
+
+**Requirements analysis**
+* Link : https://docs.google.com/document/d/14c2BPJG4Q0MvZkLL_osl64g9eAUt28ffCcuJjLKMDHY/edit
