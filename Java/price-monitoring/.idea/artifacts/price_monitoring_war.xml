@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="price-monitoring:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>price-monitoring</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="price-monitoring-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="price-monitoring:war exploded" />
+    </root>
+  </artifact>
+</component>
