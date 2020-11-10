@@ -1,24 +1,17 @@
+import tensorflow as tf
 
-def estimate_price_now(product):
-    pass
-
-
-def predict_price(product, date):
-    pass
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.layers.experimental import preprocessing
 
 
-def load_samples():
-    pass
+class PricePrediction:
+    def make_model(self):
+        pass
 
+    def load_model(self):
+        pass
 
-def create_model():
-    # CNN?
-    pass
+    def make_prediction(self, product):
+        pass
 
-
-def train_model():
-    pass
-
-
-def save_model():
-    pass
