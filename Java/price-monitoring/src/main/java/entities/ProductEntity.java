@@ -15,7 +15,6 @@ import java.util.UUID;
 @Entity
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class ProductEntity {
     @Id
     @Column

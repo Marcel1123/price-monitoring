@@ -1,7 +1,6 @@
 package entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import java.util.UUID;
 @Table(name = "city")
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class CityEntity {
     @Id
     @Column
