@@ -20,6 +20,9 @@ public class ProductPredictionEntity {
     @Id
     @Column
     private UUID id;
+    
+    @Column
+    private double predictedPrice;
 
     @Column
     private Currency currency;
