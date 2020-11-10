@@ -16,14 +16,10 @@ import java.util.UUID;
 @Table(name = "product_prediction")
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class ProductPredictionEntity {
     @Id
     @Column
     private UUID id;
-    
-    @Column
-    private double predictedPrice;
 
     @Column
     private Currency currency;

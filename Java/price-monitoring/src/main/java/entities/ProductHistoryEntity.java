@@ -16,7 +16,6 @@ import java.util.UUID;
 @Table(name = "product_history")
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class ProductHistoryEntity {
     @Id
     @Column
