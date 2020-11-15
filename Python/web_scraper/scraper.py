@@ -67,7 +67,7 @@ def imobiliare_ro_scraper(export_path=None, given_city='iasi', houses=False, pag
     current_date_for_path = today.strftime("%d-%m-%Y")
 
     # get info from given number of pages (30 products/page)
-    for i in range(11, page_number):
+    for i in range(1, page_number):
         print(i)
         URL_with_page = URL + '?pagina=' + str(i)
         page = requests.get(URL_with_page)
