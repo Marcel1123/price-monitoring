@@ -15,7 +15,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "product_prediction")
 @Data
-@RequiredArgsConstructor
 public class ProductPredictionEntity {
     @Id
     @Column

@@ -12,7 +12,6 @@ import java.util.UUID;
 @Table(name = "location")
 @Entity
 @Data
-@RequiredArgsConstructor
 public class LocationEntity {
     @Id
     @Column

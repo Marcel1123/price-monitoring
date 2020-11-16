@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "city")
 @Data
-@RequiredArgsConstructor
 public class CityEntity {
     @Id
     @Column
