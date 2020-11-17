@@ -10,3 +10,6 @@ class Product:
         self.year_of_construction = year_of_construction
         self.location_id = location_id
         self.number_of_rooms = number_of_rooms
+
+    def __str__(self):
+        return self.size + " " + self.location_id + " " + self.number_of_rooms + " " + self.product_type + " " + self.furnish_type + " " + self.year_of_construction
