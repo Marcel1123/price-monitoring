@@ -7,4 +7,5 @@ class ProductHistory:
         self.currency_type = currency_type
 
     def __str__(self):
-        return str(self.date)[:10] + " " + self.price
+        return str(self.id) + "," + str(self.product_id) + "," + str(self.date)[:-9] + "," \
+               + str(self.price) + "," + str(self.currency_type)

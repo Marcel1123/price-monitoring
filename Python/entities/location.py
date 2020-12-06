@@ -5,4 +5,4 @@ class Location:
         self.address = address
 
     def __str__(self):
-        return self.address
+        return self.id + "," + self.city_id + "," + self.address
