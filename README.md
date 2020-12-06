@@ -11,4 +11,7 @@
 
 
 **Requirements analysis**
-* Link : https://docs.google.com/document/d/14c2BPJG4Q0MvZkLL_osl64g9eAUt28ffCcuJjLKMDHY/edit
+* Link : https://docs.google.com/document/d/14c2BPJG4Q0MvZkLL_osl64g9eAUt28ffCcuJjLKMDHY
+
+**Used design patterns**
+* Link : https://docs.google.com/document/d/13uK9QNbgm2BabYryojT_wqnJQvs5bq7lMgsjQHWJFd0
