@@ -10,7 +10,7 @@ import pandas as pd
 
 
 class PricePrediction:
-    url = "D:\Projects\ASET\price-monitoring\Python\machine_learning\Bucharest_HousePriceDataset.csv"
+    url = "D:\Projects\ASET\price-monitoring\Data\Bucharest_HousePriceDataset.csv"
     column_names = ['NrCamere', 'Suprafata', 'Etaj', 'TotalEtaje', 'Sector', 'Scor', 'Pret']
 
     def __init__(self):

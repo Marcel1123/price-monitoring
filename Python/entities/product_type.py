@@ -2,8 +2,9 @@ import enum
 
 
 class ProductType(enum.Enum):
-    Detached = 0
-    Semi_detached = 1
-    Non_detached = 2
-    Studio = 3
-    House = 4
+    DETACHED = 0
+    SEMI_DETACHED = 1
+    NON_DETACHED = 2
+    STUDIO = 3
+    HOUSE = 4
+    NULL = 5

@@ -3,3 +3,6 @@ class Location:
         self.id = id
         self.city_id = city_id
         self.address = address
+
+    def __str__(self):
+        return self.id + "," + self.city_id + "," + self.address

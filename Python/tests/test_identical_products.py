@@ -3,7 +3,7 @@ import unittest
 from entities.product import Product
 from entities.furnish_type import FurnishType
 from entities.product_type import ProductType
-from machine_learning.identical_products import IdenticalProducts
+from machine_learning.data_preparation.identical_products import IdenticalProducts
 
 
 class IdenticalProductsUnitTests(unittest.TestCase):
