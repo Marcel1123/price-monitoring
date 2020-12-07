@@ -8,8 +8,9 @@ import java.util.UUID;
 
 public interface ILocationRepository {
     List<LocationEntity> getAll();
-    void addCity(LocationEntity locationEntity);
+    void add(LocationEntity locationEntity);
     LocationEntity getById(UUID id);
+    List<LocationEntity> getDistinct();
     List<LocationEntity> getByAddress(String address);
     List<LocationEntity> getByCityId(UUID id);
 }

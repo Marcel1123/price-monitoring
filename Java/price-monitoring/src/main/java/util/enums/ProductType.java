@@ -1,7 +1,9 @@
 package util.enums;
 
 public enum ProductType {
-    FURNISHED,
-    SEMI_FURNISHED,
-    UNFURNISHED
+    DETACHED,
+    SEMI_DETACHED,
+    NON_DETACHED,
+    STUDIO,
+    HOUSE
 }

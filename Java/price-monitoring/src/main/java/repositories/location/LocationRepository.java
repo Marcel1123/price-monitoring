@@ -1,9 +1,10 @@
 package repositories.location;
 
 import entities.LocationEntity;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,13 +18,21 @@ public class LocationRepository implements ILocationRepository {
     }
 
     @Override
-    public void addCity(LocationEntity locationEntity) {
-
+    public void add(LocationEntity locationEntity) {
+        EntityTransaction transaction = this.entityManager.getTransaction();
+        transaction.begin();
+        this.entityManager.persist(locationEntity);
+        transaction.commit();
     }
 
     @Override
     public LocationEntity getById(UUID id) {
-        return null;
+        return entityManager.find(LocationEntity.class, id);
+    }
+
+    @Override
+    public List<LocationEntity> getDistinct() {
+        return entityManager.createQuery("select distinct(l.address) from LocationEntity l").getResultList();
     }
 
     @Override

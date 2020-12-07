@@ -1,7 +1,6 @@
 package entities;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
