@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="ASET@localhost" uuid="7a4cb2db-8530-4617-a7e0-937901f8557d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/ASET</jdbc-url>
+    </data-source>
   </component>
 </project>

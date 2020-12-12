@@ -14,7 +14,9 @@ import util.enums.Currency;
 import util.enums.FurnishType;
 import util.enums.ProductType;
 
-import javax.persistence.Persistence;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.FileReader;
 import java.sql.Date;
 import java.util.LinkedList;
@@ -22,11 +24,17 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Named
+@ApplicationScoped
 public class CSVImport {
-    private final LocationRepository locationRepository = new LocationRepository(Persistence.createEntityManagerFactory("price-monitoring").createEntityManager());
-    private final CityRepository cityRepository = new CityRepository(Persistence.createEntityManagerFactory("price-monitoring").createEntityManager());
-    private final ProductHistoryRepository productHistoryRepository = new ProductHistoryRepository();
-    private final ProductRepository productRepository = new ProductRepository();
+    @Inject
+    private LocationRepository locationRepository;
+    @Inject
+    private CityRepository cityRepository;
+    @Inject
+    private ProductHistoryRepository productHistoryRepository;
+    @Inject
+    private ProductRepository productRepository;
 
     @SneakyThrows
     public void importLocationFromCSV(String csvLocation){
@@ -52,15 +60,18 @@ public class CSVImport {
         CSVReader csvReader = new CSVReader(new FileReader(csvLocation));
 
         String[] line = null;
-        line = csvReader.readNext();
         while ((line = csvReader.readNext()) != null) {
-            if(cityRepository.getById(UUID.fromString(line[0])) == null){
-                CityEntity cityEntity = new CityEntity();
-                cityEntity.setId(UUID.fromString(line[0]));
-                cityEntity.setName(line[1]);
-                cityEntity.setCountry(line[2]);
+            try {
+                if(cityRepository.getById(UUID.fromString(line[0])) == null){
+                    CityEntity cityEntity = new CityEntity();
+                    cityEntity.setId(UUID.fromString(line[0]));
+                    cityEntity.setName(line[1]);
+                    cityEntity.setCountry(line[2]);
 
-                cityRepository.addCity(cityEntity);
+                    cityRepository.addCity(cityEntity);
+                }
+            } catch (Exception e){
+
             }
         }
     }
@@ -125,5 +136,11 @@ public class CSVImport {
 
             }
         }
+    }
+
+    public void startImport(String path){
+        importCityFromCSV(path + "/city.csv");
+        importLocationFromCSV(path + "/locations.csv");
+        importProductFromCSV(path + "/products.csv", path + "/history.csv");
     }
 }

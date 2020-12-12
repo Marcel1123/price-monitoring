@@ -16,7 +16,6 @@ public class LocationEntity {
     private UUID id;
 
     @OneToOne
-    @Cascade(CascadeType.ALL)
     private CityEntity city;
 
     @Column

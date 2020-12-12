@@ -1,15 +1,19 @@
 package repositories.city;
 
 import entities.CityEntity;
-import lombok.AllArgsConstructor;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
+@Named
+@ApplicationScoped
 public class CityRepository implements ICityRepository {
+    @Inject
     private EntityManager entityManager;
 
     @Override

@@ -1,16 +1,19 @@
 package repositories.product;
 
 import entities.ProductEntity;
-import lombok.NoArgsConstructor;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.UUID;
 
-@NoArgsConstructor
+@Named
+@ApplicationScoped
 public class ProductRepository implements IProductRepository {
-    private final EntityManager entityManager = Persistence.createEntityManagerFactory("price-monitoring").createEntityManager();
+    @Inject
+    private EntityManager entityManager;
 
     @Override
     public void add(ProductEntity productEntity) {

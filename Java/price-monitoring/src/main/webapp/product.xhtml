@@ -23,7 +23,7 @@
 
                 <h:outputLabel value="Locations: *"/>
                 <h:selectOneMenu value="#{product.location}" required="true">
-                    <f:selectItems value="#{information.locationEntities}" var="loc" itemValue="#{loc.address}"/>
+                    <f:selectItems value="#{product.locationEntities}" var="loc" itemLabel="#{loc.address}" itemValue="#{loc.id}"/>
                 </h:selectOneMenu>
 
                 <h:outputText value="Size: *" />

@@ -15,8 +15,10 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.1.13" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.1.13" />
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:7.0" />
+          <element id="library" level="project" name="Maven: org.jboss.weld.servlet:weld-servlet:2.4.4.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:5.4.18.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.4.18.Final" />
@@ -48,6 +50,7 @@
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.2" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.4" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
