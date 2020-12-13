@@ -130,10 +130,14 @@ class DataPreparation:
                 # features = self.process_for_machine_learning(product, history, location
                 if product and product not in products:
                     products.append(product)
-                if location and location.address not in locations:
-                    locations[location.address] = location.id
+                elif product is not None:
+                    product_ = [p for p in products if p == product]
+                    history.product_id = product_[0].id
+
                 if history and history not in history_list:
                     history_list.append(history)
+                if location and location.address not in locations:
+                    locations[location.address] = location.id
                 line = fs.readline().replace("\n", "")
 
             self.make_csv()
