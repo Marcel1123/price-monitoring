@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import utils.CreateDummyData;
 import utils.InitEntityManager;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.UUID;
@@ -14,13 +15,13 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ILocationRepositoryTest {
-    private static ILocationRepository locationRepository;
+    @Inject
+    private ILocationRepository locationRepository;
     private static EntityManager entityManager;
     private static LocationEntity locationEntityForTest;
 
     @BeforeAll
     public static void setup(){
-        locationRepository = new LocationRepository(InitEntityManager.initEntityManager());
         entityManager = InitEntityManager.initEntityManager();
         CreateDummyData.createDefaultCities(entityManager);
 

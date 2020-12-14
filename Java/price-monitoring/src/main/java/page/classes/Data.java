@@ -2,10 +2,10 @@ package page.classes;
 
 import util.enums.ProductType;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @ApplicationScoped
 public class Data {
 

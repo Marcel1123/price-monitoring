@@ -1,12 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+<ui:composition template="/templates/generic-page.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <f:loadBundle var="messages" basename="messages"/>
 
-</body>
-</html>
+    <ui:define name="top">
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form styleClass="ui-g">
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+            <p:messages />
+
+            <p:panel styleClass="ui-g-6 ui-g-offset-3" header="#{messages.pd_table_head}">
+                <h:panelGrid columns="2" styleClass="ui-g-12">
+
+                    <h:outputLabel value="#{messages.type}"/>
+                    <h:selectOneMenu styleClass="ui-g-12" value="#{product.type}" required="true">
+                        <f:selectItems value="#{data.statuses}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="#{messages.loc}"/>
+                    <h:selectOneMenu styleClass="ui-g-12"  value="#{product.location}" required="true">
+                        <f:selectItems value="#{product.locationEntities}" var="loc" itemLabel="#{loc.address}" itemValue="#{loc.id}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputText value="#{messages.size}" />
+                    <p:inputText styleClass="ui-g-12" value="#{product.size}" required="true" label="Size"/>
+
+                    <h:outputText value="#{messages.rooms}"/>
+                    <p:inputText styleClass="ui-g-12"  value="#{product.numberOfRooms}" label="Rooms"/>
+
+                    <h:outputText value="#{messages.fl_num}"/>
+                    <p:inputText  styleClass="ui-g-12" value="#{product.floorNumber}" label="Floor number"/>
+
+                    <h:outputLabel value="#{messages.yr_of_const}"/>
+                    <h:selectOneMenu styleClass="ui-g-12"  value="#{product.yearOfConstruction}">
+                        <f:selectItems value="#{yearOfConstSelector.years}" var="yr" itemLabel="#{yr}" itemValue="#{yr}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="#{messages.nb_floors}"/>
+                    <h:panelGrid columns="1" styleClass="ui-g-12">
+                        <h:outputLabel id="display-mf" value="Current value: #{product.numberOfFloors}"/>
+                        <p:slider for="txt1" display="display-mf" minValue="0"
+                                  maxValue="#{numberOfFloorsSlider.maximumNumberOfFloors}" step="1"/>
+                    </h:panelGrid>
+                    <p:inputText id="txt1" style="display: none;" value="#{product.numberOfFloors}" />
+
+                    <p:commandButton value="#{messages.sub_btn}" action="#{product.estimation}"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="footer">
+        <ui:include src="templates/footer.xhtml"/>
+    </ui:define>
+</ui:composition>

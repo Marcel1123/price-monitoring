@@ -1,28 +1,36 @@
 package repositories.location;
 
 import entities.LocationEntity;
-import lombok.*;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
+@Named
+@ApplicationScoped
 public class LocationRepository implements ILocationRepository {
+
+    @Inject
     private EntityManager entityManager;
 
     @Override
     public List<LocationEntity> getAll() {
-        return null;
+        return entityManager.createQuery("select l from LocationEntity l").getResultList();
     }
 
     @Override
     public void add(LocationEntity locationEntity) {
         EntityTransaction transaction = this.entityManager.getTransaction();
-        transaction.begin();
-        this.entityManager.persist(locationEntity);
-        transaction.commit();
+        try{
+            transaction.begin();
+            this.entityManager.persist(locationEntity);
+        } finally {
+            transaction.commit();
+        }
     }
 
     @Override

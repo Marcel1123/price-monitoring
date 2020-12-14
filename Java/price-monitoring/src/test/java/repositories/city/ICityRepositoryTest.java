@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import utils.CreateDummyData;
 import utils.InitEntityManager;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.UUID;
@@ -13,14 +14,13 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ICityRepositoryTest {
-    private static ICityRepository cityRepository;
+    @Inject
+    private ICityRepository cityRepository;
     private static EntityManager entityManager;
     private static CityEntity cityEntityForTest;
 
     @BeforeAll
     public static void setup(){
-        cityRepository = new CityRepository(InitEntityManager.initEntityManager());
-        entityManager = InitEntityManager.initEntityManager();
         CreateDummyData.createDefaultCities(entityManager);
 
         cityEntityForTest = new CityEntity();

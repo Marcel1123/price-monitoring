@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <f:loadBundle var="messages" basename="messages"/>
+    <title>Main template</title>
+</h:head>
+<h:body style="bottom: 0;">
+    <div id="top" class="top">
+        <ui:insert name="top">Top Section</ui:insert>
+    </div>
+
+    <div id="content" class="main">
+        <ui:insert name="content">Main Content</ui:insert>
+    </div>
+
+    <div id="footer" class="footer" style="position: relative;">
+        <ui:insert name="footer">Bottom Section</ui:insert>
+    </div>
+</h:body>
+</html>

@@ -48,6 +48,5 @@ public class ProductEntity {
     private List<ProductPredictionEntity> prediction;
 
     @OneToOne
-    @Cascade(CascadeType.ALL)
     private LocationEntity location;
 }
