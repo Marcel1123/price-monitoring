@@ -25,9 +25,12 @@ public class LocationRepository implements ILocationRepository {
     @Override
     public void add(LocationEntity locationEntity) {
         EntityTransaction transaction = this.entityManager.getTransaction();
-        transaction.begin();
-        this.entityManager.persist(locationEntity);
-        transaction.commit();
+        try{
+            transaction.begin();
+            this.entityManager.persist(locationEntity);
+        } finally {
+            transaction.commit();
+        }
     }
 
     @Override

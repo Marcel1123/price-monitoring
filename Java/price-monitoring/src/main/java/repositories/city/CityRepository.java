@@ -24,9 +24,12 @@ public class CityRepository implements ICityRepository {
     @Override
     public void addCity(CityEntity cityEntity) {
         EntityTransaction transaction = this.entityManager.getTransaction();
-        transaction.begin();
-        this.entityManager.persist(cityEntity);
-        transaction.commit();
+        try {
+            transaction.begin();
+            this.entityManager.persist(cityEntity);
+        } finally {
+            transaction.commit();
+        }
     }
 
     @Override

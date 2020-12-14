@@ -51,7 +51,6 @@ public class CSVImport {
 
             locationRepository.add(locationEntity);
         }
-
         csvReader.close();
     }
 
@@ -102,12 +101,12 @@ public class CSVImport {
                 try{
                     productEntity.setNumberOfFloors(Integer.parseInt(product[6]));
                 } catch (NumberFormatException e){
-                    productEntity.setNumberOfFloors(Integer.MIN_VALUE);
+                    productEntity.setNumberOfFloors(-1);
                 }
                 try{
                     productEntity.setYearOfConstruction(Integer.parseInt(product[7]));
                 } catch (NumberFormatException e){
-                    productEntity.setYearOfConstruction(Integer.MIN_VALUE);
+                    productEntity.setYearOfConstruction(-1);
                 }
                 productEntity.setNumberOfRooms(Integer.parseInt(product[8]));
 
