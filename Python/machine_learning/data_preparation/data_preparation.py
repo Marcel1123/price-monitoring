@@ -1,10 +1,8 @@
 # clean data (remove duplicates, correct errors, deal with missing values, normalization, data type conversions)
-
-# randomize data
+# TODO: remove products with wrong description (e.g. 39.000 E and 22 rooms)
 
 # visualize data to detect relevant relationships between variables or class imbalances
 
-# split into training + validation + test
 from numpy import nan
 from entities.city import City
 from entities.location import Location
@@ -75,15 +73,34 @@ def get_size(line):
     return "NULL"
 
 
+def get_number_of_floors(line):
+    number_of_floors = line[9]
+    if number_of_floors == "N/A":
+        return "NULL"
+    return number_of_floors
+
+
 def get_floor_number(line):
-    number = line[9]
+    number = line[8]
     if number.lower() in "parter":
         return "0"
     if number.lower() in "demisol":
         return "-1"
     if number == "N/A":
         return "NULL"
-    return number
+    if number == "Mansarda":
+        number_of_floors = get_number_of_floors(line)
+        if number_of_floors != "NULL":
+            return number_of_floors
+        return "NULL"
+    return line[8].split(" ")[-1]
+
+
+def get_number_of_rooms(line):
+    number_of_rooms = line[7]
+    if number_of_rooms == "N/A":
+        return "NULL"
+    return number_of_rooms
 
 
 def get_product_type(line):
@@ -100,13 +117,6 @@ def get_furnish_type(line):
         if my_type == str(existing_type).split(".")[-1]:
             return existing_type
     return FurnishType.NULL
-
-
-def get_number_of_floors(line):
-    number_of_floors = line[9]
-    if number_of_floors == "N/A":
-        return "NULL"
-    return number_of_floors
 
 
 class DataPreparation:
@@ -130,10 +140,14 @@ class DataPreparation:
                 # features = self.process_for_machine_learning(product, history, location
                 if product and product not in products:
                     products.append(product)
-                if location and location.address not in locations:
-                    locations[location.address] = location.id
+                elif product is not None:
+                    product_ = [p for p in products if p == product]
+                    history.product_id = product_[0].id
+
                 if history and history not in history_list:
                     history_list.append(history)
+                if location and location.address not in locations:
+                    locations[location.address] = location.id
                 line = fs.readline().replace("\n", "")
 
             self.make_csv()
@@ -181,7 +195,7 @@ class DataPreparation:
                           size=product_size,
                           year_of_construction=get_year(line),
                           location_id=location_id,
-                          number_of_rooms=line[7])
+                          number_of_rooms=get_number_of_rooms(line))
         product_price = line[2]
         if product_price == "N/A":
             return None, None, None
