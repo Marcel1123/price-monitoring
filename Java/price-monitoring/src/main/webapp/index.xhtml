@@ -49,7 +49,7 @@
                     </h:panelGrid>
                     <p:inputText id="txt1" style="display: none;" value="#{product.numberOfFloors}" />
 
-                    <p:commandButton value="#{messages.sub_btn}" action="#{product.estimation}"/>
+                    <h:commandButton value="#{messages.sub_btn}" actionListener="#{product.estimation()}"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>
