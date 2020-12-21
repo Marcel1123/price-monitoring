@@ -1,4 +1,6 @@
 import time
+import uuid
+
 import uvicorn
 
 from typing import Optional
@@ -7,8 +9,9 @@ from fastapi import Request
 from pydantic import BaseModel
 
 from entities.furnish_type import FurnishType
+from entities.product import Product
 from entities.product_type import ProductType
-
+from machine_learning.linear_regression import linear_regression
 
 app = FastAPI()
 
@@ -55,7 +58,16 @@ def predict_new_product_price(product: ProductRequest):
         return {"message": "Invalid year of construction that isn't null"}
     if product.number_of_rooms is not None and product.number_of_rooms < 0:
         return {"message": "Number of rooms cannot be negative"}
-    return {"message": 10}
+    product_ = Product(id=uuid.uuid4(),
+                       product_type=product.product_type,
+                       furnish_type=product.furnish_type,
+                       floor_number=product.floor_number,
+                       number_of_floors=product.number_of_floors,
+                       size=product.size,
+                       year_of_construction=product.year_of_construction,
+                       location_id=product.location_id,
+                       number_of_rooms=product.number_of_rooms)
+    return {"message": linear_regression.estimate_price(product_)}
 
 
 if __name__ == "__main__":
