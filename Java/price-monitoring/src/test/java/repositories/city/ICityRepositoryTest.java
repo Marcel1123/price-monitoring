@@ -14,13 +14,14 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ICityRepositoryTest {
-    @Inject
-    private ICityRepository cityRepository;
+    private static ICityRepository cityRepository;
     private static EntityManager entityManager;
     private static CityEntity cityEntityForTest;
 
     @BeforeAll
     public static void setup(){
+        entityManager = InitEntityManager.initEntityManager();
+        cityRepository = new CityRepository();
         CreateDummyData.createDefaultCities(entityManager);
 
         cityEntityForTest = new CityEntity();

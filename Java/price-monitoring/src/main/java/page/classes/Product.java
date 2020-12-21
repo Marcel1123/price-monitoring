@@ -2,19 +2,21 @@ package page.classes;
 
 import entities.LocationEntity;
 import entities.ProductEntity;
-import lombok.AccessLevel;
+import flexjson.JSONSerializer;
 import lombok.Getter;
 import lombok.Setter;
 import repositories.location.LocationRepository;
 import util.algo.find.products.DefaultProductFinder;
-import util.enums.ProductType;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Named
@@ -22,35 +24,31 @@ import java.util.UUID;
 @Getter
 @Setter
 public class Product implements Serializable {
-    @Getter(AccessLevel.PRIVATE)
-    @Setter(AccessLevel.PRIVATE)
     @Inject
     private LocationRepository locationRepository;
-    @Getter(AccessLevel.PRIVATE)
-    @Setter(AccessLevel.PRIVATE)
     @Inject
     private DefaultProductFinder productFinder;
-
     private List<LocationEntity> locationEntities;
 
-    private String location;
-    private int numberOfRooms;
-    private ProductType type;
-    private double size;
-    private int floorNumber;
-    private int numberOfFloors;
-    private int yearOfConstruction;
+    private Information information;
 
     @PostConstruct
     public void init(){
+        information = new Information();
         locationEntities = locationRepository.getAll();
     }
 
     public void estimation(){
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setType(type);
-        productEntity.setLocation(locationRepository.getById(UUID.fromString(location)));
-        List<ProductEntity> productEntities = productFinder.prepareQuery(productEntity);
-        System.out.println(productEntities);
+        JSONSerializer serializer = new JSONSerializer().prettyPrint(true);
+        information.getProductEntity().setLocation(locationRepository.getById(UUID.fromString(information.getLocation())));
+
+        Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+        parameterValue.put("products", serializer.serialize(productFinder.prepareQuery(information).toArray(new ProductEntity[0])));
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/price_monitoring_war/pages/productsFound.xhtml");
+        } catch (IOException e) {
+        }
     }
 }

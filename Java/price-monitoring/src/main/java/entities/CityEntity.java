@@ -2,18 +2,16 @@ package entities;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "city")
 @Data
-public class CityEntity {
+public class CityEntity implements Serializable {
     @Id
-    @Column
+    @GeneratedValue
     private UUID id;
 
     @Column

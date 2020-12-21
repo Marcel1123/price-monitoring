@@ -5,14 +5,15 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Table(name = "location")
 @Entity
 @Data
-public class LocationEntity {
+public class LocationEntity implements Serializable {
     @Id
-    @Column
+    @GeneratedValue
     private UUID id;
 
     @OneToOne

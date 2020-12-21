@@ -5,19 +5,17 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import util.enums.Currency;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Table(name = "product_prediction")
 @Data
-public class ProductPredictionEntity {
+public class ProductPredictionEntity implements Serializable {
     @Id
-    @Column
+    @GeneratedValue
     private UUID id;
     
     @Column
