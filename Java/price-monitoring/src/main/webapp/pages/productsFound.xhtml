@@ -1,0 +1,42 @@
+<ui:composition template="/templates/generic-page.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <f:loadBundle var="messages" basename="messages"/>
+
+    <ui:define name="top">
+    </ui:define>
+    <ui:define name="content">
+        <p:dataTable var="product" value="#{productFound.products}">
+            <p:column headerText="Location">
+                <h:outputText value="#{product.location.address} #{product.location.city.country} #{product.location.city.name}" />
+            </p:column>
+
+            <p:column headerText="Rooms">
+                <h:outputText value="#{product.numberOfRooms}" />
+            </p:column>
+
+            <p:column headerText="Floor">
+                <h:outputText value="#{product.floorNumber}" />
+            </p:column>
+
+            <p:column headerText="Number of floors">
+                <h:outputText value="#{product.numberOfFloors}" />
+            </p:column>
+
+            <p:column headerText="Year of Contruction">
+                <h:outputText value="#{product.yearOfConstruction}" />
+            </p:column>
+
+            <p:column headerText="Type">
+                <h:outputText value="#{product.type}" />
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+
+    <ui:define name="footer">
+        <ui:include src="../templates/footer.xhtml"/>
+    </ui:define>
+</ui:composition>

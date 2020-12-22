@@ -7,15 +7,16 @@ import util.enums.FurnishType;
 import util.enums.ProductType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Table(name = "product")
 @Entity
 @Data
-public class ProductEntity {
+public class ProductEntity implements Serializable {
     @Id
-    @Column
+    @GeneratedValue
     private UUID id;
 
     @Column
