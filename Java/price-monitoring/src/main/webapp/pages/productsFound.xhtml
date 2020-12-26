@@ -9,31 +9,37 @@
     <ui:define name="top">
     </ui:define>
     <ui:define name="content">
-        <p:dataTable var="product" value="#{productFound.products}">
-            <p:column headerText="Location">
-                <h:outputText value="#{product.location.address} #{product.location.city.country} #{product.location.city.name}" />
-            </p:column>
+        <h:form>
+            <p:dataTable var="products" value="#{productFound.products}">
+                <p:column headerText="Location">
+                    <h:outputText value="#{products.location.address}, #{products.location.city.country}, #{products.location.city.name}" />
+                </p:column>
 
-            <p:column headerText="Rooms">
-                <h:outputText value="#{product.numberOfRooms}" />
-            </p:column>
+                <p:column headerText="Rooms">
+                    <h:outputText value="#{products.numberOfRooms}" />
+                </p:column>
 
-            <p:column headerText="Floor">
-                <h:outputText value="#{product.floorNumber}" />
-            </p:column>
+                <p:column headerText="Floor">
+                    <h:outputText value="#{products.floorNumber}" />
+                </p:column>
 
-            <p:column headerText="Number of floors">
-                <h:outputText value="#{product.numberOfFloors}" />
-            </p:column>
+                <p:column headerText="Number of floors">
+                    <h:outputText value="#{products.numberOfFloors}" />
+                </p:column>
 
-            <p:column headerText="Year of Contruction">
-                <h:outputText value="#{product.yearOfConstruction}" />
-            </p:column>
+                <p:column headerText="Year of Contruction">
+                    <h:outputText value="#{products.yearOfConstruction}" />
+                </p:column>
 
-            <p:column headerText="Type">
-                <h:outputText value="#{product.type}" />
-            </p:column>
-        </p:dataTable>
+                <p:column headerText="Type">
+                    <h:outputText value="#{products.type}" />
+                </p:column>
+
+                <p:column headerText="Action">
+                    <h:commandButton value="Evolution" action="#{productFound.evolution(products)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 
     <ui:define name="footer">
