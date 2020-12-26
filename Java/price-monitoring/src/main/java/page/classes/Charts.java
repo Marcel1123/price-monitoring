@@ -51,25 +51,10 @@ public class Charts {
             labels.add(productHistoryEntity.getDate().toString());
         }
 
-//        values.add(65);
-//        values.add(59);
-//        values.add(80);
-//        values.add(81);
-//        values.add(56);
-//        values.add(55);
-//        values.add(40);
-//
-//        labels.add("January");
-//        labels.add("February");
-//        labels.add("March");
-//        labels.add("April");
-//        labels.add("May");
-//        labels.add("June");
-//        labels.add("July");
-
         dataSet.setData(values);
         dataSet.setFill(false);
-        dataSet.setLabel("My First Dataset");
+        dataSet.setLabel(prepareData());
+
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setLineTension(0.1);
         data.addChartDataSet(dataSet);
@@ -79,10 +64,28 @@ public class Charts {
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
-        title.setText("Line Chart");
+        title.setText("Product Chart");
         options.setTitle(title);
 
         lineModel.setOptions(options);
         lineModel.setData(data);
+    }
+
+    private String prepareData(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(productEntity.getLocation().getAddress());
+        stringBuilder.append(" ");
+        stringBuilder.append(productEntity.getLocation().getCity().getName());
+        stringBuilder.append(" rooms: ");
+        stringBuilder.append(productEntity.getNumberOfRooms());
+        stringBuilder.append(" year of construction: ");
+        stringBuilder.append(productEntity.getYearOfConstruction());
+        stringBuilder.append(" floor: ");
+        stringBuilder.append(productEntity.getFloorNumber());
+        stringBuilder.append("/");
+        stringBuilder.append(productEntity.getNumberOfFloors());
+
+        return stringBuilder.toString();
     }
 }

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ImportServlet", urlPatterns = {"/import"})
+//@WebServlet(name = "ImportServlet", urlPatterns = {"/import"})
 public class ImportServlet extends HttpServlet {
     @Inject
     CSVImport csvImport;

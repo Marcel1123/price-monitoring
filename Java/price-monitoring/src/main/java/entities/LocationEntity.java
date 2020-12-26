@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 public class LocationEntity implements Serializable {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     private UUID id;
 
     @OneToOne

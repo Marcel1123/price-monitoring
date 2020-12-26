@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 public class CityEntity implements Serializable {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     private UUID id;
 
     @Column

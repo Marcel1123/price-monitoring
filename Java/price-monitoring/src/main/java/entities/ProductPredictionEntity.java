@@ -15,7 +15,7 @@ import java.util.UUID;
 @Data
 public class ProductPredictionEntity implements Serializable {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     private UUID id;
     
     @Column
