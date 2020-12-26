@@ -22,8 +22,10 @@ public class ImportServlet extends HttpServlet {
     ProductRepository repository;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String source = request.getParameter("source");
-        csvImport.startImport(source);
+//        String source = request.getParameter("source");
+//        csvImport.startImport(source);
+        List<ProductEntity> productEntities = repository.demo();
+        System.out.println(productEntities);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

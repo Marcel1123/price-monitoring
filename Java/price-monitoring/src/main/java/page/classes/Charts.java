@@ -54,6 +54,7 @@ public class Charts {
         dataSet.setData(values);
         dataSet.setFill(false);
         dataSet.setLabel(prepareData());
+
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setLineTension(0.1);
         data.addChartDataSet(dataSet);
