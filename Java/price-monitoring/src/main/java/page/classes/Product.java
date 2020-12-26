@@ -1,8 +1,6 @@
 package page.classes;
 
 import entities.LocationEntity;
-import entities.ProductEntity;
-import flexjson.JSONSerializer;
 import lombok.Getter;
 import lombok.Setter;
 import repositories.location.LocationRepository;
@@ -39,13 +37,9 @@ public class Product implements Serializable {
     }
 
     public void estimation(){
-        JSONSerializer serializer = new JSONSerializer().prettyPrint(true);
         information.getProductEntity().setLocation(locationRepository.getById(UUID.fromString(information.getLocation())));
-
         Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-
-        parameterValue.put("products", serializer.serialize(productFinder.prepareQuery(information).toArray(new ProductEntity[0])));
-
+        parameterValue.put("products", productFinder.prepareQuery(information));
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/price_monitoring_war/pages/productsFound.xhtml");
         } catch (IOException e) {
