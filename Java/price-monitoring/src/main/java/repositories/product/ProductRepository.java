@@ -16,6 +16,10 @@ public class ProductRepository implements IProductRepository {
     @Inject
     private EntityManager entityManager;
 
+    public List<ProductEntity> demo(){
+        return entityManager.createQuery("select p from ProductEntity p").getResultList();
+    }
+
     @Override
     public void add(ProductEntity productEntity) {
         EntityTransaction transaction = this.entityManager.getTransaction();
