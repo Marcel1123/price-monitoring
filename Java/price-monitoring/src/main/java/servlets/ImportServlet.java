@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ImportServlet", urlPatterns = {"/import"})
+//@WebServlet(name = "ImportServlet", urlPatterns = {"/import"})
 public class ImportServlet extends HttpServlet {
     @Inject
     CSVImport csvImport;
@@ -22,10 +22,8 @@ public class ImportServlet extends HttpServlet {
     ProductRepository repository;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String source = request.getParameter("source");
-//        csvImport.startImport(source);
-        List<ProductEntity> productEntities = repository.demo();
-        System.out.println(productEntities);
+        String source = request.getParameter("source");
+        csvImport.startImport(source);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
