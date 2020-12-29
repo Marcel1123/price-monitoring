@@ -1,4 +1,4 @@
-package page.classes;
+package page.classes.charts;
 
 import entities.ProductEntity;
 import entities.ProductHistoryEntity;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Named
+@Named(value = "evolutionChart")
 @RequestScoped
 @Getter
 @Setter
