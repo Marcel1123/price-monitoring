@@ -57,7 +57,7 @@
                     <p:inputText id="txt1" style="display: none;" value="#{product.information.productEntity.numberOfFloors}" />
 
                     <h:commandButton value="#{messages.sub_btn}" actionListener="#{product.estimation()}"/>
-                    <h:commandButton value="Estimate"/>
+                    <h:commandButton value="Estimate" actionListener="#{product.predict()}"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>

@@ -1,6 +1,6 @@
 import pickle
 from pprint import pprint
-
+import os
 import numpy as np
 import json
 from sklearn.linear_model import LinearRegression
@@ -11,10 +11,12 @@ from entities.product import Product
 from entities.product_type import ProductType
 from machine_learning.linear_regression import data_imputation
 
+
 # root_path = "..\\..\\..\\Data\\"
 root_path = "..\\Data\\"
 model_all_features = "machine_learning\\linear_regression\\model_all.sav"
 model_size_and_location = "machine_learning\\linear_regression\\model_size_location.sav"
+
 
 
 def convert_locations_from_csv_to_json():
