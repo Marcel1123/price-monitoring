@@ -1,22 +1,20 @@
 import pickle
 from pprint import pprint
-import os
 import numpy as np
 import json
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
+from database import database
 from entities.furnish_type import FurnishType
 from entities.product import Product
 from entities.product_type import ProductType
 from machine_learning.linear_regression import data_imputation
 
-
 # root_path = "..\\..\\..\\Data\\"
 root_path = "..\\Data\\"
 model_all_features = "machine_learning\\linear_regression\\model_all.sav"
 model_size_and_location = "machine_learning\\linear_regression\\model_size_location.sav"
-
 
 
 def convert_locations_from_csv_to_json():
@@ -77,6 +75,33 @@ def load_products_from_csv(default, size=False, location=False, product_type=Fal
     return lr_input, lr_output
 
 
+def load_products_from_db(default, size=False, location=False, product_type=False, furnish_type=False,
+                          floor_number=False, number_of_floors=False, year_of_construction=False,
+                          number_of_rooms=False):
+    product_list = database.get_all_products()
+    products = dict()
+    for product in product_list:
+        product_ = preprocess(default, size=product.size if size else None,
+                              location_uid=product.location_id if location else None,
+                              product_type=product.product_type if product_type else None,
+                              furnish_type=product.furnish_type if furnish_type else None,
+                              floor_number=product.floor_number if floor_number else None,
+                              number_of_floors=product.number_of_floors if number_of_floors else None,
+                              year_of_construction=product.year_of_construction if year_of_construction else None,
+                              number_of_rooms=product.number_of_rooms if number_of_rooms else None)
+
+        products[product.id] = product_
+
+    lr_input = []
+    lr_output = []
+    history_list = database.get_all_history()
+    for history in history_list:
+        lr_input.append(products[history.product_id])
+        lr_output.append(history.price)
+
+    return lr_input, lr_output
+
+
 def preprocess(default, size, location_uid, product_type=None, furnish_type=None, floor_number=None,
                number_of_floors=None, year_of_construction=None, number_of_rooms=None):
     locations = load_locations_from_json()
@@ -129,13 +154,13 @@ def preprocess(default, size, location_uid, product_type=None, furnish_type=None
 def create_model(model_path, size=True, location=True, product_type=True, furnish_type=True, floor_number=True,
                  number_of_floors=True, year_of_construction=True, number_of_rooms=True):
     default = data_imputation.get_default_values()
-    lr_input, lr_output = load_products_from_csv(default, size=size, location=location,
-                                                 product_type=product_type,
-                                                 furnish_type=furnish_type,
-                                                 floor_number=floor_number,
-                                                 number_of_floors=number_of_floors,
-                                                 year_of_construction=year_of_construction,
-                                                 number_of_rooms=number_of_rooms)
+    lr_input, lr_output = load_products_from_db(default, size=size, location=location,
+                                                product_type=product_type,
+                                                furnish_type=furnish_type,
+                                                floor_number=floor_number,
+                                                number_of_floors=number_of_floors,
+                                                year_of_construction=year_of_construction,
+                                                number_of_rooms=number_of_rooms)
     lr_input, lr_output = np.array(lr_input), np.array(lr_output)
     lr_input = PolynomialFeatures(degree=2, include_bias=False).fit_transform(lr_input)
     model = LinearRegression().fit(lr_input, lr_output)
