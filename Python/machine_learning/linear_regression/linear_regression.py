@@ -101,29 +101,25 @@ def preprocess(default, size, location_uid, product_type=None, furnish_type=None
         else:
             product.append(default['furnish_type'])
 
-    if floor_number:
-        if floor_number != "NULL":
-            product.append(int(floor_number))
-        else:
-            product.append(default['floor_number'])
+    if floor_number is not None:
+        product.append(int(floor_number))
+    else:
+        product.append(default['floor_number'])
 
-    if number_of_floors:
-        if number_of_floors != "NULL":
-            product.append(int(number_of_floors))
-        else:
-            product.append(default['number_of_floors'])
+    if number_of_floors is not None:
+        product.append(int(number_of_floors))
+    else:
+        product.append(default['number_of_floors'])
 
-    if year_of_construction:
-        if year_of_construction != "NULL":
-            product.append(int(year_of_construction))
-        else:
-            product.append(default['year_of_construction'])
+    if year_of_construction is not None:
+        product.append(int(year_of_construction))
+    else:
+        product.append(default['year_of_construction'])
 
-    if number_of_rooms:
-        if number_of_rooms != "NULL" and number_of_rooms != "NULL\n":
-            product.append(int(number_of_rooms))
-        else:
-            product.append(default['number_of_rooms'])
+    if number_of_rooms is not None:
+        product.append(int(number_of_rooms))
+    else:
+        product.append(default['number_of_rooms'])
 
     return product
 
