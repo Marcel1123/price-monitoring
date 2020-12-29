@@ -1,7 +1,7 @@
 from entities.furnish_type import FurnishType
 from entities.product_type import ProductType
 
-root_path = "..\\..\\..\\Data\\"
+root_path = "..\\..\\Data\\"
 
 
 def get_default_values():
