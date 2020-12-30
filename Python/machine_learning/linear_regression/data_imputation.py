@@ -2,8 +2,11 @@ from entities.furnish_type import FurnishType
 from entities.product_type import ProductType
 from database import database
 
-# root_path = "..\\..\\..\\Data\\"
+# for api
 root_path = "..\\Data\\"
+
+# for model
+# root_path = "..\\..\\..\\Data\\"
 
 
 def get_default_values():
