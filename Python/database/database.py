@@ -50,6 +50,9 @@ from entities.product import Product
 from entities.product_history import ProductHistory
 
 db_connection = None
+full_location_list = None
+full_product_list = None
+full_history_list = None
 
 
 def get_connection():
@@ -123,39 +126,49 @@ def insert_csv_data():
 
 
 def get_all_locations():
-    conn = get_connection()
-    cursor = conn.cursor()
+    global full_location_list
+    if full_location_list is None:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    cursor.execute("select * from location")
-    location_list = cursor.fetchall()
+        cursor.execute("select * from location")
+        location_list = cursor.fetchall()
 
-    locations = []
+        locations = []
 
-    for location in location_list:
-        locations.append(Location(location[0], location[1], location[2].strip()))
+        for location in location_list:
+            locations.append(Location(location[0], location[1], location[2].strip()))
 
-    cursor.close()
-    return locations
+        cursor.close()
+        full_location_list = locations
+    return full_location_list
 
 
 def get_all_products():
-    conn = get_connection()
-    cursor = conn.cursor()
+    global full_product_list
+    if full_product_list is None:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    cursor.execute("select * from product")
-    product_list = cursor.fetchall()
+        cursor.execute("select * from product")
+        product_list = cursor.fetchall()
 
-    products = []
+        products = []
 
-    for product in product_list:
-        products.append(Product(product[0], product[2], product[3], product[5], product[7],
-                                float(product[4]), product[8], product[1], product[6]))
+        for product in product_list:
+            products.append(Product(product[0], product[2], product[3], product[5], product[7],
+                                    float(product[4]), product[8], product[1], product[6]))
 
-    cursor.close()
-    return products
+        cursor.close()
+        full_product_list = products
+    return full_product_list
 
 
 def get_all_history(product_id=None):
+    global full_history_list
+    if product_id is None and full_history_list is not None:
+        return full_history_list
+
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -169,6 +182,9 @@ def get_all_history(product_id=None):
 
     for history in history_list:
         history_.append(ProductHistory(history[0], history[1], history[4], float(history[2]), history[3]))
+
+    if product_id is None and full_history_list is None:
+        full_history_list = history_
 
     cursor.close()
     return history_
