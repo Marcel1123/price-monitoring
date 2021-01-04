@@ -1,9 +1,19 @@
+from entities.furnish_type import FurnishType
+from entities.product_type import ProductType
+
+
 class Product:
     def __init__(self, id, floor_number, furnish_type, number_of_floors, number_of_rooms,
                  size, product_type, year_of_construction, location_id):
         self.id = id
-        self.product_type = product_type
-        self.furnish_type = furnish_type
+        if isinstance(product_type, int):
+            self.product_type = ProductType(product_type).name
+        else:
+            self.product_type = product_type
+        if isinstance(furnish_type, int):
+            self.furnish_type = FurnishType(furnish_type).name
+        else:
+            self.furnish_type = furnish_type
         self.floor_number = floor_number
         self.number_of_floors = number_of_floors
         self.size = size
