@@ -4,6 +4,8 @@ import entities.ProductEntity;
 import repositories.product.ProductRepository;
 import util.csv.CSVImport;
 
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-//@WebServlet(name = "ImportServlet", urlPatterns = {"/import"})
+@WebServlet(name = "ImportServlet", urlPatterns = {"/import"})
 public class ImportServlet extends HttpServlet {
     @Inject
     CSVImport csvImport;
@@ -22,8 +24,8 @@ public class ImportServlet extends HttpServlet {
     ProductRepository repository;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String source = request.getParameter("source");
-//        csvImport.startImport(source);
+        String source = request.getParameter("source");
+        csvImport.startImport(source);
         List<ProductEntity> productEntities = repository.demo();
         System.out.println(productEntities);
     }
