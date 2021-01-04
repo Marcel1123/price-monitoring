@@ -5,7 +5,7 @@ import uvicorn
 
 from typing import Optional
 from fastapi import FastAPI, Body
-from fastapi import Request
+from fastapi import Request, Response
 from pydantic import BaseModel
 
 from entities.product import Product
@@ -34,8 +34,8 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-@app.post("/predict-new-product")
-def predict_new_product_price(product: ProductRequest):
+@app.post("/predict-new-product", status_code=200)
+def predict_new_product_price(product: ProductRequest, response: Response):
     product_ = Product(id=uuid.uuid4(),
                        product_type=product.product_type,
                        furnish_type=product.furnish_type,
@@ -45,7 +45,10 @@ def predict_new_product_price(product: ProductRequest):
                        year_of_construction=product.year_of_construction,
                        location_id=product.location_id,
                        number_of_rooms=product.number_of_rooms)
-    return {"message": linear_regression.estimate_price(product_)}
+    return_val = linear_regression.estimate_price(product_)
+    if isinstance(return_val, str):
+        response.status_code = 400
+    return {"message": return_val}
 
 
 if __name__ == "__main__":
