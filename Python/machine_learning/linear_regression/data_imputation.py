@@ -1,8 +1,12 @@
 from entities.furnish_type import FurnishType
 from entities.product_type import ProductType
+from database import database
 
-# root_path = "..\\..\\..\\Data\\"
+# for api
 root_path = "..\\Data\\"
+
+# for model
+# root_path = "..\\..\\..\\Data\\"
 
 
 def get_default_values():
@@ -26,14 +30,12 @@ def get_default_type(class_type):
         raise ValueError
 
     d = {i.name: 0 for i in class_type}
-    with open(root_path + "products.csv") as fd:
-        fd.readline()
-        line_ = fd.readline()
-        while line_:
-            line_ = line_.split(',')
-            if line_[column] != "NULL":
-                d[line_[column]] += 1
-            line_ = fd.readline()
+    product_list = database.get_all_products()
+    for product in product_list:
+        if class_type == ProductType and product.product_type != 'NULL':
+            d[product.product_type] += 1
+        elif class_type == FurnishType and product.furnish_type != 'NULL':
+            d[product.furnish_type] += 1
 
     maximum = -1
     maximum_name = ''
@@ -61,14 +63,19 @@ def get_default_mean(column_name):
     values_sum = 0
     count = 0
 
-    with open(root_path + "products.csv") as fd:
-        fd.readline()
-        line_ = fd.readline()
-        while line_:
-            line_ = line_.split(',')
-            if line_[column] != "NULL" and line_[column] != 'NULL\n':
-                values_sum += int(line_[column])
-                count += 1
-            line_ = fd.readline()
+    product_list = database.get_all_products()
+    for product in product_list:
+        if column_name == 'floor_number' and product.floor_number is not None:
+            values_sum += int(product.floor_number)
+            count += 1
+        elif column_name == 'number_of_floors' and product.number_of_floors is not None:
+            values_sum += int(product.number_of_floors)
+            count += 1
+        elif column_name == 'year_of_construction' and product.year_of_construction is not None:
+            values_sum += int(product.year_of_construction)
+            count += 1
+        elif column_name == 'number_of_rooms' and product.number_of_rooms is not None:
+            values_sum += int(product.number_of_rooms)
+            count += 1
 
     return round(values_sum / count, 0)

@@ -45,7 +45,14 @@ CREATE TABLE product_prediction (
 """
 import psycopg2
 
+from entities.location import Location
+from entities.product import Product
+from entities.product_history import ProductHistory
+
 db_connection = None
+full_location_list = None
+full_product_list = None
+full_history_list = None
 
 
 def get_connection():
@@ -118,6 +125,74 @@ def insert_csv_data():
     cursor.close()
 
 
+def get_all_locations():
+    global full_location_list
+    if full_location_list is None:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("select * from location")
+        location_list = cursor.fetchall()
+
+        locations = []
+
+        for location in location_list:
+            locations.append(Location(location[0], location[1], location[2].strip()))
+
+        cursor.close()
+        full_location_list = locations
+    return full_location_list
+
+
+def get_all_products():
+    global full_product_list
+    if full_product_list is None:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("select * from product")
+        product_list = cursor.fetchall()
+
+        products = []
+
+        for product in product_list:
+            products.append(Product(product[0], product[2], product[3], product[5], product[7],
+                                    float(product[4]), product[8], product[1], product[6]))
+
+        cursor.close()
+        full_product_list = products
+    return full_product_list
+
+
+def get_all_history(product_id=None):
+    global full_history_list
+    if product_id is None and full_history_list is not None:
+        return full_history_list
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    if product_id is None:
+        cursor.execute("select * from product_history")
+    else:
+        cursor.execute("select * from product_history where product_id = %s", (product_id,))
+    history_list = cursor.fetchall()
+
+    history_ = []
+
+    for history in history_list:
+        history_.append(ProductHistory(history[0], history[1], history[4], float(history[2]), history[3]))
+
+    if product_id is None and full_history_list is None:
+        full_history_list = history_
+
+    cursor.close()
+    return history_
+
+
 if __name__ == '__main__':
-    insert_csv_data()
+    # insert_csv_data()
+    # get_all_locations()
+    # get_all_products()
+    get_all_history('0007f197-eaf3-4f85-aeb3-fa8d971c08d0')
     db_connection.close()
