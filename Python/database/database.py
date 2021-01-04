@@ -156,8 +156,10 @@ def get_all_products():
         products = []
 
         for product in product_list:
-            products.append(Product(product[0], product[2], product[3], product[5], product[7],
-                                    float(product[4]), product[8], product[1], product[6]))
+            products.append(Product(product[0], product[1], product[2], product[3], product[4],
+                                    float(product[5]), product[6], product[7], product[8]))
+            # products.append(Product(product[0], product[2], product[3], product[5], product[7],
+            #                        float(product[4]), product[8], product[1], product[6]))
 
         cursor.close()
         full_product_list = products
@@ -181,7 +183,8 @@ def get_all_history(product_id=None):
     history_ = []
 
     for history in history_list:
-        history_.append(ProductHistory(history[0], history[1], history[4], float(history[2]), history[3]))
+        history_.append(ProductHistory(history[0], history[1], history[2], float(history[3]), history[4]))
+        # history_.append(ProductHistory(history[0], history[1], history[4], float(history[2]), history[3]))
 
     if product_id is None and full_history_list is None:
         full_history_list = history_
