@@ -1,6 +1,6 @@
 class Product:
-    def __init__(self, id, product_type, furnish_type, floor_number, number_of_floors, size,
-                 year_of_construction, location_id, number_of_rooms):
+    def __init__(self, id, floor_number, furnish_type, number_of_floors, number_of_rooms,
+                 size, product_type, year_of_construction, location_id):
         self.id = id
         self.product_type = product_type
         self.furnish_type = furnish_type
@@ -10,6 +10,18 @@ class Product:
         self.year_of_construction = year_of_construction
         self.location_id = location_id
         self.number_of_rooms = number_of_rooms
+
+    # def __init__(self, id, product_type, furnish_type, floor_number, number_of_floors, size,
+    #              year_of_construction, location_id, number_of_rooms):
+    #     self.id = id
+    #     self.product_type = product_type
+    #     self.furnish_type = furnish_type
+    #     self.floor_number = floor_number
+    #     self.number_of_floors = number_of_floors
+    #     self.size = size
+    #     self.year_of_construction = year_of_construction
+    #     self.location_id = location_id
+    #     self.number_of_rooms = number_of_rooms
 
     def __eq__(self, other):
         return self.size == other.size and \
