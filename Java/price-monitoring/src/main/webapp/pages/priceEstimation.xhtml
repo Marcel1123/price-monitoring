@@ -10,30 +10,39 @@
     </ui:define>
 
     <ui:define name="content">
-        <div class="ui-g">
+        <div class="ui-g" style="padding-bottom: 20px;">
             <p:panel styleClass="ui-g-6 ui-g-offset-3" header="#{messages.pd_table_head}">
                 <h:panelGrid columns="2" styleClass="ui-g-12">
 
                     <h:outputLabel value="#{messages.type}"/>
-                    <h:outputText value="#{priceEstimation.productEntity.product_type}"/>
+                    <h:outputText value="#{priceEstimation.estimatePriceModel.product_type}"/>
 
                     <h:outputLabel value="#{messages.loc}"/>
-                    <h:outputText value="#{priceEstimation.productEntity.location_id}"/>
+                    <h:outputText value="#{priceEstimation.locationCompleteName}"/>
 
                     <h:outputText value="#{messages.size}" />
-                    <h:outputText value="#{priceEstimation.productEntity.size}"/>
+                    <h:outputText value="#{priceEstimation.estimatePriceModel.size}"/>
 
                     <h:outputText value="#{messages.rooms}"/>
-                    <h:outputText value="#{priceEstimation.productEntity.number_of_rooms}"/>
+                    <h:outputText value="#{priceEstimation.estimatePriceModel.number_of_rooms}"/>
 
                     <h:outputText value="#{messages.fl_num}"/>
-                    <h:outputText value="#{priceEstimation.productEntity.floor_number}"/>
+                    <h:outputText value="#{priceEstimation.estimatePriceModel.floor_number}"/>
 
                     <h:outputLabel value="#{messages.yr_of_const}"/>
-                    <h:outputText value="#{priceEstimation.productEntity.year_of_construction}"/>
+                    <h:outputText value="#{priceEstimation.estimatePriceModel.year_of_construction}"/>
 
                     <h:outputLabel value="#{messages.nb_floors}"/>
-                    <h:outputText value="#{priceEstimation.productEntity.number_of_floors}"/>
+                    <h:outputText value="#{priceEstimation.estimatePriceModel.number_of_floors}"/>
+                </h:panelGrid>
+            </p:panel>
+        </div>
+        <div class="ui-g">
+            <p:panel style="text-align: center;" styleClass="ui-g-6 ui-g-offset-3" header="Estimated price for your product">
+                <h:panelGrid columns="2" styleClass="ui-g-12">
+                    <h1 style="font-size: 300%; text-align: center; margin: 0;">
+                        #{priceEstimation.estimatedPrice} EUR
+                    </h1>
                 </h:panelGrid>
             </p:panel>
         </div>
