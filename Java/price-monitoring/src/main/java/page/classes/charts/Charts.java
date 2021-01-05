@@ -10,6 +10,7 @@ import org.primefaces.model.charts.line.LineChartDataSet;
 import org.primefaces.model.charts.line.LineChartModel;
 import org.primefaces.model.charts.line.LineChartOptions;
 import org.primefaces.model.charts.optionconfig.title.Title;
+import util.Redirect;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -34,6 +35,9 @@ public class Charts {
     public void init(){
         Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         productEntity = (ProductEntity) parameterValue.get("product_for_evaluation");
+
+        if(productEntity == null)
+            Redirect.redirectToIndex();
 
         createLineModel();
     }

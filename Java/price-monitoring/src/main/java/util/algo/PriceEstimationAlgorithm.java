@@ -8,7 +8,9 @@ import lombok.SneakyThrows;
 import util.models.APIResponseModel;
 import util.models.EstimatePriceModel;
 
+import javax.faces.context.FacesContext;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -38,21 +40,29 @@ public class PriceEstimationAlgorithm {
 
         int responseCode = connection.getResponseCode();
 
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(
-                        connection.getInputStream()
-                )
-        );
+        if(responseCode == 200){
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            connection.getInputStream()
+                    )
+            );
 
-        StringBuilder response = new StringBuilder();
-        String currentLine;
+            StringBuilder response = new StringBuilder();
+            String currentLine;
 
-        while ((currentLine = in.readLine()) != null)
-            response.append(currentLine);
+            while ((currentLine = in.readLine()) != null)
+                response.append(currentLine);
 
-        in.close();
+            in.close();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        this.apiResponseModel = objectMapper.readValue(response.toString(), APIResponseModel.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            this.apiResponseModel = objectMapper.readValue(response.toString(), APIResponseModel.class);
+        } else {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/price_monitoring_war/index.xhtml");
+                this.apiResponseModel = new APIResponseModel();
+            } catch (IOException e) {
+            }
+        }
     }
 }

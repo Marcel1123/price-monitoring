@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import repositories.location.LocationRepository;
+import util.Redirect;
 import util.algo.PriceEstimationAlgorithm;
+import util.models.APIResponseModel;
 import util.models.EstimatePriceModel;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.util.Map;
 
 @Named
@@ -35,6 +38,10 @@ public class PriceEstimation {
     public void init(){
         Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         estimatePriceModel = (EstimatePriceModel) parameterValue.get("product");
+
+        if(estimatePriceModel == null){
+            Redirect.redirectToIndex();
+        }
 
         PriceEstimationAlgorithm algorithm = new PriceEstimationAlgorithm();
         algorithm.makeAPICall(estimatePriceModel);
