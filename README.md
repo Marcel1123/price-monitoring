@@ -17,4 +17,4 @@
 * Link : https://docs.google.com/document/d/13uK9QNbgm2BabYryojT_wqnJQvs5bq7lMgsjQHWJFd0
 
 **Report**
-* Link : https://docs.google.com/document/d/1TspT0s0POH9PFxOq-SjvSJq21tebAyVK05MlMS8r1EE/edit userstoinvite=parlogmarcel1997%40gmail.com&ts=5ff73e68&actionButton=1#heading=h.kolmwcf4bok9 *
+* Link : https://docs.google.com/document/d/1TspT0s0POH9PFxOq-SjvSJq21tebAyVK05MlMS8r1EE/edit?userstoinvite=parlogmarcel1997%40gmail.com&ts=5ff73e68&actionButton=1#heading=h.l72ruksngyan *
